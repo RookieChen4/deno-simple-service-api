@@ -1,134 +1,43 @@
-import User from '../interface/User.ts'
-import { v4 as uuid } from 'https://deno.land/std/uuid/mod.ts'
-import * as bcrypt from "https://deno.land/x/bcrypt/mod.ts";
-import { Client } from "https://deno.land/x/postgres/mod.ts";
-import { dbCreds } from '../config.ts'
-const client = new Client(dbCreds);
+import { RouterContext, uuid, yup } from "../deps.ts";
+import { MUser } from "../models/user.ts";
+import User from "../interface/user.ts";
+import { generateJwt } from '../jwt.ts'
+
+// 判断注册的模型是否合法
+const signupSchema = yup.object({
+    email: yup
+      .string()
+      .email()
+      .required(),
+    password: yup.string().required(),
+    username: yup.string().required()
+  });
 
 
-const handleResult = (result:any) => {
-    let property: string[]= result.rowDescription.columns.map((it:any) => it.name)
-    let user = result.rows.map((el:any) => {
-        let obj: any = {}
-        property.forEach((it,index) => {
-            obj[it] = el[index]
-        })
-        return obj
-    })
-    return user
-}
-
-// find User by username
-const getUsertByname = async ({params, response}:{params:{username:string},response:any}) => {
+  // 注册
+export async function signUp(ctx: RouterContext) {
+    const { request, response } = ctx
     try {
-        await client.connect()
-        const result = await client.query( "SELECT * FROM USERS WHERE username = $1",params.username)
-        let user = handleResult(result)
-        if(result.rowCount === 0) {
-            response.status = 200
+        const body = await request.body()
+        const data: Omit<User, 'id'> = body.value
+        await signupSchema.validate(data);
+        const userId = uuid.generate();
+        // 查找邮箱是否注册过
+        const user = await MUser.findOneByEmail(data.email);
+        if(user) {
+            response.status = 400;
             response.body = {
-                success: true,
-                data: user
-            }
-        } else {
-            response.status = 200
-            response.body = {
-                success: true,
-                data: user
-            }
+                message: `该邮箱${data.email} 已被注册！`
+            };
+            return;
         }
-    } catch (err) {
-        response.status = 500
+        const { id } = await MUser.insert({ ...data, id: userId });
+        const jwt = await generateJwt(id);
+        response.status = 201;
         response.body = {
-            success: false,
-            data: err.toString()
-        }
-    } finally {
-        client.end()
+            data: jwt
+        };
+    } catch (error) {
+        throw error
     }
 }
-
-// Insert User
-const InsertUser = async({request ,response}:{request:any,response:any}) => {
-    const body = await request.body()
-    if(!request.hasBody) {
-        response.status = 400
-        response.body = {
-            success: false,
-            data: 'bad request'
-        }
-    } else {
-        const User:User = body.value
-        await getUsertByname({params:{"username":User.username},response})
-        console.log(response.body.data)
-        if(!response.body.data.length) {
-            try {
-                await client.connect()
-                User.id = uuid.generate();
-                User.password = await bcrypt.hash(User.password);
-                const result = await client.query("INSERT INTO USERS(id,username,password,email) VALUES($1,$2,$3,$4)",
-                User.id,User.username,User.password,User.email)
-                response.status = 200
-                response.body = {
-                    success: true,
-                    data: User
-                }
-            }catch (err){
-                response.status = 500
-                response.body = {
-                    success: false,
-                    data: err.toString()
-                }
-            } finally {
-                await client.end()
-            }
-        } else {
-            response.status = 400
-            response.body = {
-                success: false,
-                data: '已存在该用户'
-            }
-        }
-    }
-}
-
-// login
-const login = async({request ,response}:{request:any,response:any}) => {
-    const body = await request.body()
-    if(!request.hasBody) {
-        response.status = 400
-        response.body = {
-            success: false,
-            data: 'bad request'
-        }
-    } else {
-        const User:User = body.value
-        await getUsertByname({params:{"username":User.username},response})
-        if(response.body.data.length) {
-            console.log(User.password, response.body.data[0].password)
-            const result = await bcrypt.compare(User.password, response.body.data[0].password);
-            console.log(User.password, response.body.data[0].password,result)
-            if(result) {
-                response.status = 200
-                response.body = {
-                    success: true,
-                    data: '登录成功'
-                }
-            } else {
-                response.status = 400
-                response.body = {
-                    success: false,
-                    data: '密码错误'
-                }
-            }
-        } else {
-            response.status = 400
-            response.body = {
-                success: false,
-                data: '该用户不存在'
-            }
-        }
-    }
-}
-
-export { InsertUser, getUsertByname, login }

@@ -5,3 +5,5 @@ export const dbCreds = {
     hostname: "localhost",
     port: 5432
 }
+
+export const jwtSecret = 'cjh'

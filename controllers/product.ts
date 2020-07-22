@@ -45,7 +45,14 @@ const handleResult = (result:any) => {
 
 
 // get all products
-const getProducts = async({response}:{response:any}) => {
+const getProducts = async({response,state}:{response:any,state:any}) => {
+    if (!state.user) {
+        response.status = 401;
+        response.body = {
+            message: "Unauthorized"
+        };
+        return;
+    }
     try {
         await client.connect()
         const result = await client.query("SELECT * FROM PRODUCT")
