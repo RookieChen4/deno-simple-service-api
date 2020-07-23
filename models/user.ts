@@ -87,6 +87,25 @@ class UserModel {
       }
     }
 
+    // 验证密码
+    async comparePassword(email: string,password: string): Promise<Omit<User, "password"> | null> {
+      try {
+        const [user] = await this.get("email", email)
+        if(!user) return null
+
+        const result = bcrypt.compare(password, user.password)
+        if(!result) return null
+
+        return {
+          id: user.id,
+          email: user.email,
+          username: user.username
+        }
+      } catch (error) {
+        throw error
+      }
+    }
+
 }
 
 export const MUser = new UserModel(dbClient);
