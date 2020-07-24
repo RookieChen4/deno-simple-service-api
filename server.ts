@@ -8,7 +8,15 @@ const app = new Application<{
     user: Omit<User, "password"> | null;
   }>();
 
-app.use(handleAuthHeader)
+  
+app.use(async (ctx: any, next: any) => {
+  ctx.response.headers.set("Access-Control-Allow-Origin", "*");
+  ctx.response.headers.set("Access-Control-Allow-Methods", "*");
+  await next();
+});
+
+
+// app.use(handleAuthHeader)
 app.use(handleErrors)
 app.use(router.routes())
 app.use(router.allowedMethods())
