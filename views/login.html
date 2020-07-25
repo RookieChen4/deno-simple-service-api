@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="login-container">
+        <header>登录界面</header>
+        <main>
+            <form>
+                <label for="username">用户名</label>
+                <input type="text" id="username" name="username" placeholder="Your username..">
+
+                <label for="password">密码</label>
+                <input type="text" id="password" name="password" placeholder="Your password..">
+
+                <label for="email">邮箱</label>
+                <input type="text" id="email" name="email" placeholder="Your email..">
+                <button type="submit" onclick="login(event)">登录</button>
+            </form>
+        </main>
+        <footer>页脚</footer>
+    </div>
+</body>
+<script>
+    function login(e) {
+        e.preventDefault()
+        const form = {
+            username: "cjh",
+            password: "cjh",
+            email: "1164566601@qq.com"
+        }
+        fetch('http://localhost:5000/api/login',{
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(form)})
+        .then(function(response) {
+            return response.json();
+        })
+        .then(function(myJson) {
+            console.log(myJson)
+            if(myJson) {
+                window.location.href = 'http://localhost:5000/index.html'
+            }
+        });
+    }
+</script>
+</html>
