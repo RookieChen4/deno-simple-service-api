@@ -1,4 +1,4 @@
-import { Application, Router } from "https://deno.land/x/oak@v4.0.0/mod.ts"
+import { Application, Router, send } from "https://deno.land/x/oak@v4.0.0/mod.ts"
 import router from './routes.ts'
 import { handleAuthHeader, handleErrors } from "./middlewares.ts"
 import User from "./interface/user.ts";
@@ -15,12 +15,22 @@ app.use(async (ctx: any, next: any) => {
   await next();
 });
 
+// 请求页面资源
+app.use(async (context,next: () => Promise<void>) => {
+  if(context.request.url.pathname.includes('api')) {
+    await next()
+  } else {
+    await send(context, context.request.url.pathname, {
+      root: `${Deno.cwd()}/views`,
+      index: context.request.url.pathname.replace("/",''),
+    });
+  }
+});
 
-// app.use(handleAuthHeader)
+app.use(handleAuthHeader)
 app.use(handleErrors)
 app.use(router.routes())
 app.use(router.allowedMethods())
-
 
 app.addEventListener("error", (evt) => {
     console.log(evt.error);
