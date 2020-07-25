@@ -8,7 +8,7 @@ const app = new Application<{
     user: Omit<User, "password"> | null;
   }>();
 
-  
+
 app.use(async (ctx: any, next: any) => {
   ctx.response.headers.set("Access-Control-Allow-Origin", "*");
   ctx.response.headers.set("Access-Control-Allow-Methods", "*");
@@ -18,13 +18,12 @@ app.use(async (ctx: any, next: any) => {
 // 请求页面资源
 app.use(async (context,next: () => Promise<void>) => {
   if(context.request.url.pathname.includes('api')) {
-    await next()
-  } else {
-    await send(context, context.request.url.pathname, {
-      root: `${Deno.cwd()}/views`,
-      index: context.request.url.pathname.replace("/",''),
-    });
+    return await next()
   }
+  await send(context, context.request.url.pathname, {
+    root: `${Deno.cwd()}/views`,
+    index: context.request.url.pathname,
+  });
 });
 
 app.use(handleAuthHeader)
