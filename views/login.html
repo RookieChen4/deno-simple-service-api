@@ -10,43 +10,83 @@
         <header>登录界面</header>
         <main>
             <form>
-                <label for="username">用户名</label>
-                <input type="text" id="username" name="username" placeholder="Your username..">
+                <label for="email">邮箱</label>
+                <input type="text" id="email" name="email" placeholder="Your email..">
 
                 <label for="password">密码</label>
                 <input type="text" id="password" name="password" placeholder="Your password..">
 
-                <label for="email">邮箱</label>
-                <input type="text" id="email" name="email" placeholder="Your email..">
                 <button type="submit" onclick="login(event)">登录</button>
             </form>
         </main>
         <footer>页脚</footer>
     </div>
 </body>
+<script src="utils/cookie.js"></script>
 <script>
+    function VaildateIslogin() {
+        const AuthKey = getCookie("AuthKey")
+        AuthKey&&(
+            fetch('http://localhost:5000/api/me',{
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'authorization' : AuthKey
+                }})
+            .then(function(response) {
+                if(response.status == 401) {
+                    throw new Error('Whoops!') 
+                }
+                return response.json();
+            })
+            .then(function(myJson) {
+                if(myJson) {
+                    window.location.href = 'http://localhost:5000/index.html'
+                    return
+                }
+            }).catch(err=>{
+                alert('无此用户！重新登录')
+            })
+        )
+    }
+    VaildateIslogin()
+    function VaildateForm() {
+        const email = document.querySelector('#email').value
+        const password = document.querySelector('#password').value
+        if(email == '' || password == '') {
+            alert('email或password 空')
+            return false
+        }
+        return {
+            email: email,
+            password: password
+        }
+    }
     function login(e) {
         e.preventDefault()
-        const form = {
-            username: "cjh",
-            password: "cjh",
-            email: "1164566601@qq.com"
-        }
-        fetch('http://localhost:5000/api/login',{
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(form)})
-        .then(function(response) {
-            return response.json();
-        })
-        .then(function(myJson) {
-            console.log(myJson)
-            if(myJson) {
-                window.location.href = 'http://localhost:5000/index.html'
-            }
-        });
+        VaildateForm() && (
+            fetch('http://localhost:5000/api/login',{
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(VaildateForm())})
+            .then(function(response) {
+                if(response.status == 400) {
+                    throw new Error('Whoops!') 
+                }
+                return response.json();
+            })
+            .then(function(myJson) {
+                if(myJson) {
+                    document.cookie="AuthKey=" + myJson.data;
+                    window.location.href = 'http://localhost:5000/index.html'
+                    return
+                }
+            }).catch(err=>{
+                alert('无此用户或密码错误！')
+            })
+        )
     }
 </script>
 </html>

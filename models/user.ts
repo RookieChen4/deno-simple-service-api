@@ -93,7 +93,7 @@ class UserModel {
         const [user] = await this.get("email", email)
         if(!user) return null
 
-        const result = bcrypt.compare(password, user.password)
+        const result = await bcrypt.compare(password, user.password)
         if(!result) return null
 
         return {
