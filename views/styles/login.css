@@ -33,6 +33,10 @@ body {
     transform: translate(-35vw);
 }
 
+.loginwrapleft {
+    left: 50vw !important;
+}
+
 
 .index-container .login-wrap {
     position: absolute;
@@ -155,7 +159,7 @@ body {
 .login-wrap .login-content .form {
     display: flex;
     flex-direction: column;
-    margin-top: 20px;
+    margin: 20px;
     padding-left: 30px;
 }
 
@@ -223,6 +227,32 @@ body {
 @media (min-width: 1000px) {
     .main-description {
         padding-top: 100px !important;
+    }
+    .login-content {
+        padding-top: 25px !important;
+    }
+}
+
+@media (max-width: 1000px) {
+    .index-container .main-wrap {
+        width: 100%;
+        z-index: 0;
+    }
+    .index-container .login-wrap {
+        position: fixed !important;
+        width: 100vw !important;
+        z-index: 99;
+        left: 100vw;
+        background: rgb(255, 255, 255);
+    }
+    .loginwrapleft {
+        left: 0 !important;
+    }
+    .login-wrap .login-content .img {
+        display: none;
+    }
+    .login-wrap .login-content .title {
+        font-size: 60px;
     }
     .login-content {
         padding-top: 25px !important;

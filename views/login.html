@@ -57,9 +57,17 @@
 <script src="utils/cookie.js"></script>
 <script src="utils/debounce.js"></script>
 <script>
-    document.querySelector('#main').style.height = document.body.scrollHeight + 'px'
+    window.addEventListener('load',() =>{
+        document.querySelector('#main').style.height = document.body.scrollHeight + 'px'
+    })
+    // document.querySelector('#main').style.height = document.body.scrollHeight + 'px'
     window.addEventListener('resize',debounce(() => {
-        (document.body.scrollHeight > window.innerHeight) && (document.querySelector('#main').style.height = document.body.scrollHeight + 'px')
+        console.log(document.body.scrollHeight,window.innerHeight)
+        if(document.body.scrollHeight > window.innerHeight) {
+            document.querySelector('#main').style.height = document.body.scrollHeight + 'px'
+        } else {
+            document.querySelector('#main').style.height = '100vh'
+        }
     },500))
     document.querySelector('#main').addEventListener('click',(e) => {
         hideorShowform(false)
@@ -75,11 +83,11 @@
         const hideorshow = flag
         if(hideorshow) {
             document.querySelector('.main-wrap').classList.add('showLoginform')
-            document.querySelector('.login-wrap').style.left = '50vw'
+            document.querySelector('.login-wrap').classList.add('loginwrapleft')
             return
         }
         document.querySelector('.main-wrap').classList.remove('showLoginform')
-        document.querySelector('.login-wrap').style.left = '85vw'
+        document.querySelector('.login-wrap').classList.remove('loginwrapleft')
     }
     function VaildateIslogin() {
         const AuthKey = getCookie("AuthKey")
