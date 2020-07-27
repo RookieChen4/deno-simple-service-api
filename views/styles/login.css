@@ -1,0 +1,234 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+@font-face{
+    font-family: 'CreteRound-Italic';
+    src : url('../fonts/CreteRound-Italic.ttf');
+}
+body {
+    font-family: "CreteRound-Italic", Helvetica;
+    overflow-x: hidden;
+}
+.index-container {
+    width: 100%;
+    min-height: 100vh;
+    position: relative;
+}
+
+.index-container .main-wrap {
+    background-color: rgb(204, 255, 0);
+    width: 85vw;
+    min-height: 100vh;
+    transition: transform 0.8s;
+}
+
+.index-container .main-wrap .main-description {
+    padding-top: 128px;
+    padding-left: 8.3333333333%;
+}
+
+.showLoginform {
+    transform: translate(-35vw);
+}
+
+
+.index-container .login-wrap {
+    position: absolute;
+    z-index: 99;
+    width: 50vw;
+    min-height: 100vh;
+    left: 85vw;
+    top: 0;
+    transition: left 0.8s;
+    /* transition: left 0.9s cubic-bezier(0.23, 1, 0.32, 1); */
+    overscroll-behavior: none;
+}
+
+.content .title {
+    padding-left: 15px;
+    font-size: 110px;
+    font-weight: 900;
+    line-height: 1;
+}
+
+.content .description {
+    padding-left: 15px;
+    font-size: 30px;
+    line-height: 1.16;
+    margin-top: 0px;
+    max-width: 60%;
+    margin: 64px 0;
+}
+
+.content .sign {
+    padding-left: 15px;
+}
+
+.content .sign button {
+    color: white;
+    appearance: none;
+    font-family: inherit;
+    font-size: 26px;
+    font-weight: bold;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    position: relative;
+    white-space: nowrap;
+    cursor: pointer;
+    background: black;
+    border-radius: 50px;
+    border-width: 0px;
+    border-style: initial;
+    border-color: initial;
+    border-image: initial;
+    outline: 0px !important;
+}
+
+.content .sign button span {
+    padding: 0.2em 1em;
+}
+
+.content .sign button svg {
+    margin-right: 1em;
+    transition: transform 0.3s ease 0s;
+}
+
+.content .sign button:hover svg {
+    transform: translate(0.3em);
+}
+
+.login-wrap .login-content {
+    position: relative;
+    padding-top: 75px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.login-wrap .close {
+    margin-top: 32px;
+    margin-left: 16px;
+    margin-right: 16px;
+    display: flex;
+    justify-content: flex-end;
+}
+.login-wrap .login-content article {
+    padding-left: 20px;
+    display: flex;
+    align-items: center;
+}
+.login-wrap .login-content .title {
+    padding-left: 15px;
+    font-size: 110px;
+    font-weight: 900;
+    line-height: 1;
+}
+
+.login-wrap .login-content .img {
+    position: absolute;
+    left: 65%;
+    width: 190px;
+    top: 0px;
+}
+
+.login-wrap .login-content img {
+    width: 100%;
+    height: auto;
+    transform: scale(1);   
+}
+
+.login .login-content article {
+    display: flex;
+}
+
+.login .login-content article .login-article{
+    width: 66.666666%;
+}
+.login-wrap .login-content .description {
+    width: 57%;
+    padding-left: 20px;
+    margin: 20px 0;
+}
+
+.login-wrap .login-content .form {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    padding-left: 30px;
+}
+
+.login-wrap .login-content .form input{
+    margin-bottom: 0.8em;
+    appearance: none;
+    font-family: inherit;
+    font-size: 16px;
+    line-height: 2.8em;
+    display: flex;
+    background: transparent;
+    border-width: 2px;
+    border-style: solid;
+    border-color: rgba(0, 0, 0, 0.8);
+    border-image: initial;
+    border-radius: 50px;
+    padding: 0px 1em;
+    outline: 0px !important;
+}
+
+.login-wrap .login-content .form button {
+    color: white;
+    appearance: none;
+    font-family: inherit;
+    font-size: 26px;
+    font-weight: bold;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    white-space: nowrap;
+    cursor: pointer;
+    background: black;
+    border-radius: 50px;
+    border-width: 0px;
+    border-style: initial;
+    border-color: initial;
+    border-image: initial;
+    outline: 0px !important;
+    padding: 0.2em 1em;
+}
+@media (min-width: 1000px) { 
+    .title {
+        font-size: 60px !important;
+    }
+}
+@media(max-width: 1300px) {
+    .close {
+        /* margin-top: 15px !important; */
+    }
+}
+@media (min-width: 1600px) { 
+    .title {
+        font-size: 90px !important;
+    }
+    .login-wrap .login-content .img {
+        width: 250px
+    }
+}
+@media (min-width: 1920px) { 
+    .title {
+        font-size: 110px !important;
+    }
+    .login-wrap .login-content .img {
+        width: 280px
+    }
+}
+@media (min-width: 1000px) {
+    .main-description {
+        padding-top: 100px !important;
+    }
+    .login-content {
+        padding-top: 25px !important;
+    }
+}

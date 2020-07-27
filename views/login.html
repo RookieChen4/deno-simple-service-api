@@ -3,27 +3,86 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/login.css">
+    <!-- <link href="//db.onlinewebfonts.com/c/2167e9e35ef8a0823ae2d0a7eb4461e9?family=Good+Sans+Black" rel="stylesheet" type="text/css"/> -->
     <title>Document</title>
 </head>
 <body>
-    <div class="login-container">
-        <header>登录界面</header>
-        <main>
-            <form>
-                <label for="email">邮箱</label>
-                <input type="text" id="email" name="email" placeholder="Your email..">
-
-                <label for="password">密码</label>
-                <input type="text" id="password" name="password" placeholder="Your password..">
-
-                <button type="submit" onclick="login(event)">登录</button>
-            </form>
+    <div class="index-container">
+        <main class="main-wrap" id="main">
+            <article class="main-description">
+                <div class="content">
+                    <section class="title">Let's burst some <br> damn bubbles.</section>
+                    <section class="description"><p>We’re growing a gang of people like you to share the hell out of Rouser’s first projects. 
+                        Be sure to see them as they drop and help wake the world.</p></section>
+                    <section class="sign">
+                        <button onclick="hideorShowform(true,event)">
+                            <span>sign up for now</span>
+                            <svg width="22" height="20" viewBox="0 0 22 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M0.454867 8.066L0.454867 12.46L13.2989 12.46L9.06087 16.698L12.1029 19.714L21.5149 10.276L12.1029 0.837999L9.08687 3.88L13.2989 8.066L0.454867 8.066Z" fill="white">
+                                </path>
+                            </svg>
+                        </button>
+                    </section>
+                </div>
+            </article>
+            <!-- <footer>页脚</footer> -->
         </main>
-        <footer>页脚</footer>
+        <aside class="login-wrap" id="aside">
+            <div class="close">Close</div>
+            <div class="login-content">
+                <article>
+                    <div class="login-article">
+                        <div class="title">You'll only
+                            <br>
+                            hear from
+                            <br>
+                            us when
+                            <br>
+                            it matters.
+                        </div>
+                        <div class="description">We don't bombard you with emails, beg you for money or make you sign a bunch of petitions politicians don’t give a shit about.</div>
+                    </div>
+                    <div class="img"><img src="https://www.rouserlab.com/wp-content/themes/rouser/dist/c1179934d3dd04d4199545222c0f4288.svg" /></div>
+                </article>
+                <form class="form">
+                    <input type="text" id="email" name="email" placeholder="Your email..">
+                    <input type="text" id="password" name="password" placeholder="Your password..">
+                    <button type="submit" onclick="login(event)"><span>submit</span></button>
+                </form>
+            </div>
+        </aside>
     </div>
 </body>
 <script src="utils/cookie.js"></script>
 <script>
+    document.querySelector('#main').style.height = document.body.scrollHeight + 'px'
+    // window.addEventListener('load',() => {
+    //     document.querySelector('#main').style.height = document.body.scrollHeight + 'px'
+    // })
+    window.addEventListener('resize',() => {
+        document.querySelector('#main').style.height = document.body.scrollHeight + 'px'
+    })
+    document.querySelector('#main').addEventListener('click',(e) => {
+        hideorShowform(false)
+    })
+    document.querySelector('#aside').addEventListener('click',(e) => {
+        hideorShowform(true)
+    })
+    document.querySelector('.close').addEventListener('click',(e) => {
+        hideorShowform(false,event)
+    })
+    function hideorShowform(flag,event) {
+        event&&event.stopPropagation()
+        const hideorshow = flag
+        if(hideorshow) {
+            document.querySelector('.main-wrap').classList.add('showLoginform')
+            document.querySelector('.login-wrap').style.left = '50vw'
+            return
+        }
+        document.querySelector('.main-wrap').classList.remove('showLoginform')
+        document.querySelector('.login-wrap').style.left = '85vw'
+    }
     function VaildateIslogin() {
         const AuthKey = getCookie("AuthKey")
         AuthKey&&(
