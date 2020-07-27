@@ -55,14 +55,12 @@
     </div>
 </body>
 <script src="utils/cookie.js"></script>
+<script src="utils/debounce.js"></script>
 <script>
     document.querySelector('#main').style.height = document.body.scrollHeight + 'px'
-    // window.addEventListener('load',() => {
-    //     document.querySelector('#main').style.height = document.body.scrollHeight + 'px'
-    // })
-    window.addEventListener('resize',() => {
-        document.querySelector('#main').style.height = document.body.scrollHeight + 'px'
-    })
+    window.addEventListener('resize',debounce(() => {
+        (document.body.scrollHeight > window.innerHeight) && (document.querySelector('#main').style.height = document.body.scrollHeight + 'px')
+    },500))
     document.querySelector('#main').addEventListener('click',(e) => {
         hideorShowform(false)
     })
