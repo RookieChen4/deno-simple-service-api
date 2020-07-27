@@ -3,12 +3,15 @@
     padding: 0;
     box-sizing: border-box;
 }
+::-webkit-scrollbar {
+    width:0px;
+}
 @font-face{
     font-family: 'CreteRound-Italic';
     src : url('../fonts/CreteRound-Italic.ttf');
 }
 body {
-    font-family: "CreteRound-Italic", Helvetica;
+    font-family: Helvetica;
     overflow-x: hidden;
 }
 .index-container {
@@ -55,6 +58,7 @@ body {
     font-size: 110px;
     font-weight: 900;
     line-height: 1;
+    letter-spacing: -0.07em;
 }
 
 .content .description {
@@ -107,7 +111,7 @@ body {
 .login-wrap .login-content {
     position: relative;
     padding-top: 75px;
-    padding-left: 20px;
+    /* padding-left: 20px; */
     padding-right: 20px;
 }
 
@@ -125,22 +129,23 @@ body {
 }
 .login-wrap .login-content .title {
     padding-left: 15px;
-    font-size: 110px;
+    font-size: 90px;
     font-weight: 900;
     line-height: 1;
+    letter-spacing: -0.07em;
 }
 
 .login-wrap .login-content .img {
     position: absolute;
-    left: 65%;
-    width: 190px;
-    top: 0px;
+    left: 68%;
+    width: 170px;
+    /* top: 0px; */
 }
 
 .login-wrap .login-content img {
     width: 100%;
     height: auto;
-    transform: scale(1);   
+    transform: scale(1.2);   
 }
 
 .login .login-content article {
@@ -160,7 +165,7 @@ body {
     display: flex;
     flex-direction: column;
     margin: 20px;
-    padding-left: 30px;
+    padding-left: 15px;
 }
 
 .login-wrap .login-content .form input{
@@ -202,34 +207,27 @@ body {
     outline: 0px !important;
     padding: 0.2em 1em;
 }
-@media (min-width: 1000px) { 
-    .title {
-        font-size: 60px !important;
-    }
-}
 
-@media (min-width: 1600px) { 
-    .title {
-        font-size: 90px !important;
-    }
-    .login-wrap .login-content .img {
-        width: 250px
-    }
-}
-@media (min-width: 1920px) { 
+@media (max-width: 1920px) { 
     .title {
         font-size: 110px !important;
     }
+    .login-wrap .login-content .title {
+        font-size: 90px !important;
+    }
     .login-wrap .login-content .img {
-        width: 280px
+        width: 220px
     }
 }
-@media (min-width: 1000px) {
-    .main-description {
-        padding-top: 100px !important;
+@media (max-width: 1600px) { 
+    .title {
+        font-size: 90px !important;
     }
-    .login-content {
-        padding-top: 25px !important;
+    .login-wrap .login-content .title {
+        font-size: 60px !important;
+    }
+    .login-wrap .login-content .img {
+        width: 170px
     }
 }
 
@@ -251,10 +249,38 @@ body {
     .login-wrap .login-content .img {
         display: none;
     }
+    .title {
+        font-size: 60px !important;
+    }
+    .description {
+        font-size: 22px !important;
+    }
     .login-wrap .login-content .title {
         font-size: 60px;
     }
     .login-content {
         padding-top: 25px !important;
+    }
+}
+
+@media (max-width: 500px) {
+    .index-container {
+        overflow-x: hidden;
+    }
+    .title {
+        font-size: 52px !important;
+    }
+    .main-description {
+        padding-top: 20px !important;
+    }
+    .description {
+        font-size: 16px !important;
+        max-width: 90% !important;
+    }
+    .login-content {
+        padding-top: 10px !important;
+    }
+    .login-wrap .login-content .description{
+        width: 100%;
     }
 }
