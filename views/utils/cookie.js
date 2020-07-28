@@ -1,4 +1,4 @@
-function getCookie(key) {
+export function getCookie(key) {
     const cookies = document.cookie.split(";")
     const map = new Map();
     cookies.forEach(element => {

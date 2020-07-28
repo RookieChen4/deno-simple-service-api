@@ -4,22 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script src="fetchCard.js" defer></script>
-    <script src="card.js" defer></script>
-    <style>
-        .card {
-            background-color: greenyellow;
-        }
-    </style>
 </head>
 <body>
-    <button onclick="test()">123</button>
     <main>
+        <header><div id="username"></div><div id="email"></div></header>
     </main>
 </body>
-<script>
-    function test () {
-        alert('123')
-    }
+<script type="module">
+    const username = document.querySelector('#username')
+    const email = document.querySelector('#email')
+    import getUserInfo from './utils/getUserInfo.js'
+    getUserInfo().then(res => {
+        console.log(res)
+        username.innerHTML = res.username
+        email.innerHTML = res.email
+    }).catch((reject) => {
+        username.innerHTML = ''
+        email.innerHTML = ''
+        console.log(reject)
+    })
 </script>
+<!-- <script src="fetchCard.js" defer></script>
+<script src="card.js" defer></script> -->
 </html>

@@ -12,15 +12,16 @@ export async function handleAuthHeader(
 
         const jwt = request.headers.get("authorization")|| "";
         const validatedJwt :any = await validateJwt({ jwt, key:jwtSecret, algorithm: "HS256"});
-        if (!validatedJwt) {
+        if (!validatedJwt.isValid) {
             state.user = null;
+        } else {
+            const user = await MUser.findOneById(validatedJwt.payload?.id as string);
+            if (!user) {
+                state.user = null;
+                return
+            }
+            state.user = user;
         }
-
-        const user = await MUser.findOneById(validatedJwt?.payload?.id! as string);
-        if (!user) {
-            state.user = null;
-        }
-        state.user = user;
         await next();
     } catch (error) {
         throw error;

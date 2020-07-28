@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./styles/login.css">
-    <!-- <link href="//db.onlinewebfonts.com/c/2167e9e35ef8a0823ae2d0a7eb4461e9?family=Good+Sans+Black" rel="stylesheet" type="text/css"/> -->
     <title>Document</title>
 </head>
 <body>
@@ -45,7 +44,7 @@
                     </div>
                     <div class="img"><img src="https://www.rouserlab.com/wp-content/themes/rouser/dist/c1179934d3dd04d4199545222c0f4288.svg" /></div>
                 </article>
-                <form class="form">
+                <form class="form" onsubmit="return false">
                     <input type="text" id="email" name="email" placeholder="Your email..">
                     <input type="text" id="password" name="password" placeholder="Your password..">
                     <button type="submit" onclick="login(event)"><span>submit</span></button>
@@ -53,9 +52,20 @@
             </div>
         </aside>
     </div>
-</body>
-<script src="utils/cookie.js"></script>
 <script src="utils/debounce.js"></script>
+<script type="module">
+    import getUserInfo from './utils/getUserInfo.js'
+    import { getCookie } from './utils/cookie.js'
+    function VaildateIslogin() {
+        const AuthKey = getCookie('AuthKey')
+        AuthKey&&getUserInfo().then(res => {
+            window.location.href = 'http://localhost:5000/index.html'
+        }).catch((reject) => {
+            alert('无此用户！重新登录')
+        })
+    }
+    VaildateIslogin()
+</script>
 <script>
     window.addEventListener('load',() =>{
         document.querySelector('#main').style.height = document.body.scrollHeight + 'px'
@@ -89,32 +99,6 @@
         document.querySelector('.main-wrap').classList.remove('showLoginform')
         document.querySelector('.login-wrap').classList.remove('loginwrapleft')
     }
-    function VaildateIslogin() {
-        const AuthKey = getCookie("AuthKey")
-        AuthKey&&(
-            fetch('http://localhost:5000/api/me',{
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'authorization' : AuthKey
-                }})
-            .then(function(response) {
-                if(response.status == 401) {
-                    throw new Error('Whoops!') 
-                }
-                return response.json();
-            })
-            .then(function(myJson) {
-                if(myJson) {
-                    window.location.href = 'http://localhost:5000/index.html'
-                    return
-                }
-            }).catch(err=>{
-                alert('无此用户！重新登录')
-            })
-        )
-    }
-    VaildateIslogin()
     function VaildateForm() {
         const email = document.querySelector('#email').value
         const password = document.querySelector('#password').value
@@ -128,7 +112,8 @@
         }
     }
     function login(e) {
-        e.preventDefault()
+        console.log(e)
+        e.preventDefault();
         VaildateForm() && (
             fetch('http://localhost:5000/api/login',{
                 method: 'POST',
@@ -154,4 +139,5 @@
         )
     }
 </script>
+</body>
 </html>
