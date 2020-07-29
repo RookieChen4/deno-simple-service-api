@@ -6,6 +6,7 @@ html {
 * {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 ul {
     list-style: none;
@@ -79,8 +80,8 @@ header {
 
 /* userInfo */
 .main-header .header-container .main-userInfo {
-    margin-left: auto;
-    float: right;
+    /* margin-left: auto;
+    float: right; */
 }
 .main-header .header-container .main-userInfo img{
     vertical-align: middle;
@@ -132,4 +133,31 @@ header {
     margin: auto;
     margin-top: 20px;
     background-color: #fff;
+}
+
+.room-list {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.room-item {
+    width:  33.333333%;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.room-info {
+    width: 100%;
+}
+
+.room-img {
+    width: 100%;
+}
+.room-img img{
+    width: 100%;
+    height: auto;
+}
+
+.room-name {
+    text-align: center;
 }

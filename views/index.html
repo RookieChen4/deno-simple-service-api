@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="./styles/index.css">
+    <script src="./components/roomCard.js" defer></script>
 </head>
 <body>
     <div id="cjh">
@@ -37,8 +38,36 @@
         </header>
         <main class="main-wrap">
             <div class="home-widget">
-                <section></section>
-                <section></section>
+                <section class="room-content">
+                    <div class="content-wrap">
+                        <h1>房间</h1>
+                        <ul class="room-list">
+                            <li class="room-item">
+                                <article class="room-info">
+                                    <a class="room-img"><img src="./assets/article.png"/><p class="room-name">名称</p></a>
+                                </article>
+                            </li>
+                            <li class="room-item">
+                                <article class="room-info">
+                                    <a class="room-img"><img src="./assets/article.png"/><p class="room-name">名称</p></a>
+                                </article>
+                            </li>
+                            <li class="room-item">
+                                <article class="room-info">
+                                    <a class="room-img"><img src="./assets/article.png"/><p class="room-name">名称</p></a>
+                                </article>
+                            </li>
+                            <li class="room-item">
+                                <article class="room-info">
+                                    <a class="room-img"><img src="./assets/article.png"/><p class="room-name">名称</p></a>
+                                </article>
+                            </li>
+                            <li class="room-item">
+                                <room-card />
+                            </li>
+                        </ul>
+                    </div>
+                </section>
             </div>
         </main>
         <footer></footer>
