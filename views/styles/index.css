@@ -1,0 +1,135 @@
+/* @import "./normalize.css"; */
+html {
+    font-size: 12px;
+    background-color: #ecf0f1;
+}
+* {
+    margin: 0;
+    padding: 0;
+}
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+header {
+    background-color: #fff;
+}
+.main-header {
+    max-height: 80px;
+}
+.main-header .header-container {
+    display: flex;
+    max-width: 960px;
+    margin: auto;
+    align-items: center;
+}
+
+/* logo */
+.main-header .header-container .logo .logo-PC {
+    width: 80px;
+    height: auto;
+    margin-right: 2rem;
+    vertical-align: middle;
+}
+
+
+/* nav */
+.main-header .header-container .main-nav {
+    flex: 1;
+}
+.main-header .header-container .main-nav .nav-list {
+    display: flex;
+    height: 100%;
+}
+.main-header .header-container .main-nav .nav-list .nav-item {
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0 2rem;
+    line-height: 80px;
+}
+.nav-search {
+    flex: 1;
+}
+.main-header .header-container .main-nav .nav-list .nav-search input{
+    border: none;
+    box-shadow: none;
+    outline: none;
+    font-size: 1.1rem;
+    color: #666;
+    background-color: transparent;
+}
+.search-form {
+    display: flex;
+    border: 1px solid hsla(0,0%,59.2%,.2);
+    background-color: rgba(227,231,236,.2);
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 2px;
+    padding: .6rem 1rem;
+}
+.search-icon {
+    width: 1.5rem;
+    height: auto;
+}
+
+
+
+/* userInfo */
+.main-header .header-container .main-userInfo {
+    margin-left: auto;
+    float: right;
+}
+.main-header .header-container .main-userInfo img{
+    vertical-align: middle;
+}
+.main-header .header-container .main-userInfo  .action-list {
+    display: flex;
+    align-items: center;
+}
+.main-header .header-container .main-userInfo  .action-list .action-item {
+    display: flex;
+    align-items: center;
+    line-height: 80px;
+    padding: 0 10px;
+}
+.main-header .header-container .main-userInfo  .action-list .action-item .creatRoom {
+    height: 100%;
+    color: #fff;
+    background-color: #007fff;
+    border-radius: 3px;
+    -webkit-appearance: none;
+    appearance: none;
+    background-color: #007fff;
+    color: #fff;
+    border-radius: 2px;
+    border: none;
+    padding: .5rem 1.3rem;
+    outline: none;
+    transition: background-color .3s,color .3s;
+    cursor: pointer;
+}
+.main-header .header-container .main-userInfo  .action-list .action-item .notify {
+    width: 3rem;
+    height: auto;
+}
+.main-header .header-container .main-userInfo  .action-list .action-item .useraction {
+    display: flex;
+}
+.main-header .header-container .main-userInfo .avatar img {
+    width: 3rem;
+    height: auto;
+}
+
+
+
+/* main */ 
+.main-wrap {
+    max-width: 960px;
+    height: 100vh;
+    margin: auto;
+    margin-top: 20px;
+    background-color: #fff;
+}

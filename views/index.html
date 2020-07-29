@@ -4,11 +4,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="./styles/index.css">
 </head>
 <body>
-    <main>
-        <header><div id="username"></div><div id="email"></div></header>
-    </main>
+    <div id="cjh">
+        <header class="main-header">
+            <div class="header-container">
+                <a class="logo">
+                    <img class="logo-PC" src="./assets/logo.png"/>
+                </a>
+                <nav class="main-nav">
+                    <ul class="nav-list">
+                        <li class="nav-item">首页</li>
+                        <li class="nav-item">话题</li>
+                        <li class="nav-item">活动</li>
+                        <li class="nav-item nav-search">
+                            <form class="search-form">
+                                <input placeholder="search"/>
+                                <img class="search-icon" src="./assets/search.png"/>
+                            </form>
+                        </li>
+                    </ul>
+                </nav>
+                <div class="main-userInfo">
+                    <ul class="action-list">
+                        <li class="action-item"><div class="useraction"><button class="creatRoom">创建房间</button></div></li>
+                        <li class="action-item"><a class="useraction"><img class="notify" src="./assets/notification.png" /></a></li>
+                        <li class="action-item"><div class="avatar useraction"><img src="./assets/avatar.png" /></div></li>
+                    </ul>
+                </div>
+            </div>
+        </header>
+        <main class="main-wrap">
+            <div class="home-widget">
+                <section></section>
+                <section></section>
+            </div>
+        </main>
+        <footer></footer>
+    </div>
 </body>
 <script type="module">
     const username = document.querySelector('#username')
