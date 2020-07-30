@@ -1,4 +1,3 @@
-/* @import "./normalize.css"; */
 html {
     font-size: 12px;
     font-family: 'Noto Sans SC', sans-serif;
@@ -14,11 +13,9 @@ ul {
     margin: 0;
     padding: 0;
 }
-header {
-    background-color: #fff;
-}
 .main-header {
     max-height: 80px;
+    background-color: #fff;
 }
 .main-header .header-container {
     display: flex;
@@ -134,57 +131,6 @@ header {
     height: auto;
 }
 
-
-.cf:before, .cf:after {
-    content: " ";
-    display: table;
-}
-.cf:after {
-    clear: both;
-}
-/* main */ 
-.main-wrap {
-    max-width: 960px;
-    min-height: calc(100vh - 100px);
-    margin: auto;
-    margin-top: 20px;
-    background-color: #fff;
-}
-.content-title {
-    width: 100%;
-    border-bottom: 1px solid #ecf0f1;
-    padding: 10px 0 10px 15px;
-}
-
-.room-list {
-    /* display: flex;
-    flex-wrap: wrap; */
-    padding-top: 20px;
-}
-
-.room-item {
-    width:  33.333333%;
-    margin-bottom: 10px;
-    padding: 0 15px;
-}
-
-.room-info {
-    width: 100%;
-}
-
-.room-img {
-    width: 100%;
-}
-.room-img img{
-    width: 100%;
-    height: auto;
-}
-
-.room-name {
-    text-align: center;
-}
-
-
 @media (max-width: 960px) {
     .main-header .header-container {
         width: 100%;
@@ -245,4 +191,98 @@ header {
     .notify {
         display: none !important;
     }
+}
+
+
+
+
+
+
+
+/* main */
+.main-wrap {
+    max-width: 1170px;
+    height: calc(100vh - 100px);
+    max-height: calc(100vh - 100px);
+    margin: auto;
+    margin-top: 20px;
+    background-color: #fff;
+}
+
+.chat-wrap {
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+
+.roomer-wrap {
+    width: 30%;
+    background-color: saddlebrown;
+}
+
+.message-wrap {
+    flex: 1;
+    background-color: salmon;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.message-widget {
+    flex: 1;
+    background-color: seagreen;
+}
+
+.sendmessage {
+    width: 100%;
+    height: 5rem;
+    background-color: #fff;
+}
+
+.roomer-wrap {
+    padding: 1rem;
+}
+
+.roomer-wrap .number {
+    font-size: 2rem;
+}
+
+.roomer-wrap .title {
+    display: flex;
+    align-items: center;
+    justify-content:space-between;
+}
+
+.roomer-list-wrap {
+    margin-top: 1rem;
+}
+
+.roomer-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.roomer-item {
+    display: flex;
+    margin-top: 1rem;
+}
+.userwrap {
+    display: flex;
+    align-items: center;
+}
+.useravatar-wrap {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    overflow: hidden;
+    background-color: transparent;
+}
+.userwrap .useravatar {
+    vertical-align: middle;
+    width: 100%;
+    height: auto;
+}
+.username {
+    margin-left: 1rem;
+    font-size: 2rem;
 }
