@@ -4,8 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC&display=swap" rel="stylesheet"> -->
     <link rel="stylesheet" href="./styles/index.css">
     <script src="./components/roomCard.js" defer></script>
+    <script src="./utils/masonry.pkgd.min.js"></script>
 </head>
 <body>
     <div id="cjh">
@@ -13,6 +15,7 @@
             <div class="header-container">
                 <a class="logo">
                     <img class="logo-PC" src="./assets/logo.png"/>
+                    <img class="menu" src="./assets/menu.png"/>
                 </a>
                 <nav class="main-nav">
                     <ul class="nav-list">
@@ -40,30 +43,44 @@
             <div class="home-widget">
                 <section class="room-content">
                     <div class="content-wrap">
-                        <h1>房间</h1>
-                        <ul class="room-list">
+                        <div class="content-title">
+                            <h1>房间</h1>
+                        </div>
+                        <ul class="room-list cf" id="grid">
                             <li class="room-item">
                                 <article class="room-info">
-                                    <a class="room-img"><img src="./assets/article.png"/><p class="room-name">名称</p></a>
+                                    <a class="room-img"><img src="./assets/1.jpg"/><p class="room-name">名称</p></a>
                                 </article>
                             </li>
                             <li class="room-item">
                                 <article class="room-info">
-                                    <a class="room-img"><img src="./assets/article.png"/><p class="room-name">名称</p></a>
+                                    <a class="room-img"><img src="./assets/2.jpg"/><p class="room-name">名称</p></a>
                                 </article>
                             </li>
                             <li class="room-item">
                                 <article class="room-info">
-                                    <a class="room-img"><img src="./assets/article.png"/><p class="room-name">名称</p></a>
+                                    <a class="room-img"><img src="./assets/3.jpg"/><p class="room-name">名称</p></a>
                                 </article>
                             </li>
                             <li class="room-item">
                                 <article class="room-info">
-                                    <a class="room-img"><img src="./assets/article.png"/><p class="room-name">名称</p></a>
+                                    <a class="room-img"><img src="./assets/4.jpg"/><p class="room-name">名称</p></a>
                                 </article>
                             </li>
                             <li class="room-item">
-                                <room-card />
+                                <article class="room-info">
+                                    <a class="room-img"><img src="./assets/5.jpg"/><p class="room-name">名称</p></a>
+                                </article>
+                            </li>
+                            <li class="room-item">
+                                <article class="room-info">
+                                    <a class="room-img"><img src="./assets/6.jpg"/><p class="room-name">名称</p></a>
+                                </article>
+                            </li>
+                            <li class="room-item">
+                                <article class="room-info">
+                                    <a class="room-img"><img src="./assets/7.jpg"/><p class="room-name">名称</p></a>
+                                </article>
                             </li>
                         </ul>
                     </div>
@@ -73,7 +90,15 @@
         <footer></footer>
     </div>
 </body>
-<script type="module">
+<script>
+    window.addEventListener('load',() => {
+        var elem = document.querySelector('.room-list');
+        var msnry = new Masonry( elem, {
+            itemSelector: '.room-item'
+        });
+    })
+</script>
+<!-- <script type="module">
     const username = document.querySelector('#username')
     const email = document.querySelector('#email')
     import getUserInfo from './utils/getUserInfo.js'
@@ -86,7 +111,7 @@
         email.innerHTML = ''
         console.log(reject)
     })
-</script>
+</script> -->
 <!-- <script src="fetchCard.js" defer></script>
 <script src="card.js" defer></script> -->
 </html>

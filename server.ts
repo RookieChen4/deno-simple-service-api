@@ -1,8 +1,8 @@
 import { Application, Router, send } from "https://deno.land/x/oak@v4.0.0/mod.ts"
 import router from './routes.ts'
 import { handleAuthHeader, handleErrors } from "./middlewares.ts"
-import * as dejs from 'https://deno.land/x/dejs@0.8.0/mod.ts';
-import { renderFileToString } from 'https://deno.land/x/dejs/mod.ts';
+// import * as dejs from 'https://deno.land/x/dejs@0.8.0/mod.ts';
+// import { renderFileToString } from 'https://deno.land/x/dejs/mod.ts';
 import User from "./interface/user.ts";
 const { cwd, stdout, copy } = Deno;
 const port = Deno.env.get("PORT") || 5000
@@ -23,13 +23,13 @@ app.use(async (context,next: () => Promise<void>) => {
   if(context.request.url.pathname.includes('api')) {
     return await next()
   }
-  if(context.request.url.pathname.includes('template')) {
-    const output = await renderFileToString(`${cwd()}/views/template.ejs`, {
-      name: 'world',
-    });
-    context.response.body = output
-    return
-  }
+  // if(context.request.url.pathname.includes('template')) {
+  //   const output = await renderFileToString(`${cwd()}/views/template.ejs`, {
+  //     name: 'world',
+  //   });
+  //   context.response.body = output
+  //   return
+  // }
   await send(context, context.request.url.pathname, {
     root: `${Deno.cwd()}/views`,
     index: context.request.url.pathname,

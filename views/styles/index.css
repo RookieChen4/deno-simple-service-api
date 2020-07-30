@@ -1,6 +1,7 @@
 /* @import "./normalize.css"; */
 html {
     font-size: 12px;
+    font-family: 'Noto Sans SC', sans-serif;
     background-color: #ecf0f1;
 }
 * {
@@ -27,10 +28,19 @@ header {
 }
 
 /* logo */
+.logo {
+    /* display: flex; */
+    margin-right: 2rem;
+}
 .main-header .header-container .logo .logo-PC {
     width: 80px;
     height: auto;
-    margin-right: 2rem;
+    vertical-align: middle;
+}
+.main-header .header-container .logo .menu {
+    display: none;
+    width: 25px;
+    height: auto;
     vertical-align: middle;
 }
 
@@ -125,25 +135,37 @@ header {
 }
 
 
-
+.cf:before, .cf:after {
+    content: " ";
+    display: table;
+}
+.cf:after {
+    clear: both;
+}
 /* main */ 
 .main-wrap {
     max-width: 960px;
-    height: 100vh;
+    min-height: calc(100vh - 100px);
     margin: auto;
     margin-top: 20px;
     background-color: #fff;
 }
+.content-title {
+    width: 100%;
+    border-bottom: 1px solid #ecf0f1;
+    padding: 10px 0 10px 15px;
+}
 
 .room-list {
-    display: flex;
-    flex-wrap: wrap;
+    /* display: flex;
+    flex-wrap: wrap; */
+    padding-top: 20px;
 }
 
 .room-item {
     width:  33.333333%;
-    padding-left: 15px;
-    padding-right: 15px;
+    margin-bottom: 10px;
+    padding: 0 15px;
 }
 
 .room-info {
@@ -160,4 +182,47 @@ header {
 
 .room-name {
     text-align: center;
+}
+
+
+@media (max-width: 960px) {
+    .main-header .header-container {
+        width: 100%;
+    }
+    .main-wrap {
+        width: 100%;
+    }
+    .room-item {
+        width:  50%;
+        margin-bottom: 10px;
+        padding: 0 15px;
+    }
+    .main-header .header-container .nav-item {
+        display: none !important;
+    }
+    .main-header .header-container .nav-search {
+        display: inline-block !important;
+    }
+    .main-header .header-container .main-userInfo {
+        margin-left: auto;
+    }
+    .main-header .header-container .logo .menu {
+        display:  inline-block;
+    }
+}
+
+@media (max-width: 630px) {
+    .creatRoom , .search-icon {
+        display: none !important;
+    }
+    .logo {
+        margin-right: 0;
+    }
+    .nav-search {
+        padding: 0 !important;
+    }
+    .main-header .header-container .main-nav  {
+        display: flex;
+        justify-content: flex-end;
+    }
 }

@@ -10,8 +10,8 @@ class roomCard extends HTMLElement {
     constructor() {
         super()
         this.shadow = this.attachShadow({mode: 'open'})
-        this.img.src = "./assets/article.png"
-        this.p.innerHTML = '名称'
+        this.img.src = this.getAttribute('img');
+        this.p.innerHTML = this.getAttribute('roomName');
         this.a.appendChild(this.img)
         this.a.appendChild(this.p)
         this.article.appendChild(this.a)
