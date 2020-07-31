@@ -30,6 +30,7 @@ class roomCard extends HTMLElement {
             
             p {
                 text-align: center;
+                margin: 0;
             }
         `;
         this.shadow.appendChild(this.style)

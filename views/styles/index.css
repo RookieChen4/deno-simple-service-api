@@ -196,8 +196,8 @@ header {
     }
     .room-item {
         width:  50%;
-        margin-bottom: 10px;
-        padding: 0 15px;
+        margin-bottom: 0;
+        padding: 0 0.5rem;
     }
     .main-header .header-container .nav-item {
         display: none !important;

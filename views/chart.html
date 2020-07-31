@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Document</title>
-    <link rel="stylesheet" href="./styles/chart.css">
+    <link rel="stylesheet" href="./styles/chart.css?version=3">
 </head>
 <body>
     <div id="cjh">
@@ -57,16 +57,65 @@
                             <li class="roomer-item">
                                 <a class="userwrap"><div class="useravatar-wrap"><img class="useravatar" src="./assets/avatar.png"/></div><div class="username">cjh</div></a>
                             </li>
+                            <li class="roomer-item">
+                                <a class="userwrap"><div class="useravatar-wrap"><img class="useravatar" src="./assets/avatar.png"/></div><div class="username">cjh</div></a>
+                            </li>
+                            <li class="roomer-item">
+                                <a class="userwrap"><div class="useravatar-wrap"><img class="useravatar" src="./assets/avatar.png"/></div><div class="username">cjh</div></a>
+                            </li>
+                            <li class="roomer-item">
+                                <a class="userwrap"><div class="useravatar-wrap"><img class="useravatar" src="./assets/avatar.png"/></div><div class="username">cjh</div></a>
+                            </li>
+                            <li class="roomer-item">
+                                <a class="userwrap"><div class="useravatar-wrap"><img class="useravatar" src="./assets/avatar.png"/></div><div class="username">cjh</div></a>
+                            </li>
+                            <li class="roomer-item">
+                                <a class="userwrap"><div class="useravatar-wrap"><img class="useravatar" src="./assets/avatar.png"/></div><div class="username">cjh</div></a>
+                            </li>
+                            <li class="roomer-item">
+                                <a class="userwrap"><div class="useravatar-wrap"><img class="useravatar" src="./assets/avatar.png"/></div><div class="username">cjh</div></a>
+                            </li>
+                            <li class="roomer-item">
+                                <a class="userwrap"><div class="useravatar-wrap"><img class="useravatar" src="./assets/avatar.png"/></div><div class="username">cjh</div></a>
+                            </li>
+                            <li class="roomer-item">
+                                <a class="userwrap"><div class="useravatar-wrap"><img class="useravatar" src="./assets/avatar.png"/></div><div class="username">cjh</div></a>
+                            </li>
+                            <li class="roomer-item">
+                                <a class="userwrap"><div class="useravatar-wrap"><img class="useravatar" src="./assets/avatar.png"/></div><div class="username">cjh</div></a>
+                            </li>
+                            <li class="roomer-item">
+                                <a class="userwrap"><div class="useravatar-wrap"><img class="useravatar" src="./assets/avatar.png"/></div><div class="username">cjh</div></a>
+                            </li>
+                            <li class="roomer-item">
+                                <a class="userwrap"><div class="useravatar-wrap"><img class="useravatar" src="./assets/avatar.png"/></div><div class="username">cjh</div></a>
+                            </li>
+                            <li class="roomer-item">
+                                <a class="userwrap"><div class="useravatar-wrap"><img class="useravatar" src="./assets/avatar.png"/></div><div class="username">cjh</div></a>
+                            </li>
                         </ul>
                     </section>
                 </div>
                 <div class="message-wrap">
                     <div class="message-widget"></div>
-                    <div class="sendmessage"></div>
+                    <form class="sendmessage">
+                        <div class="sendInput"><input type="text"/></div>
+                        <div class="sendButton">
+                            <button>发送</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </main>
-        <footer></footer>
+        <!-- <footer style="position: absolute;bottom: 0;">1111</footer> -->
     </div>
 </body>
+<script>
+    document.querySelector('.main-wrap').style.height = (window.innerHeight  - 56) + 'px'
+    document.querySelector('.main-wrap').style.maxHeight = (window.innerHeight  - 56) + 'px'
+    window.addEventListener('resize', () => {
+        document.querySelector('.main-wrap').style.height = (window.innerHeight  - 56) + 'px'
+        document.querySelector('.main-wrap').style.maxHeight = (window.innerHeight  - 56) + 'px'
+    })    
+</script>
 </html>
