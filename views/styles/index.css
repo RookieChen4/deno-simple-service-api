@@ -124,6 +124,7 @@ header {
 }
 .main-header .header-container .main-userInfo  .action-list .action-item .notify {
     width: 3rem;
+    max-height: 3rem;
     height: auto;
 }
 .main-header .header-container .main-userInfo  .action-list .action-item .useraction {
@@ -131,6 +132,7 @@ header {
 }
 .main-header .header-container .main-userInfo .avatar img {
     width: 3rem;
+    max-height: 3rem;
     height: auto;
 }
 
