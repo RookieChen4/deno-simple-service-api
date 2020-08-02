@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="./styles/index.css">
     <script src="./components/roomCard.js" defer></script>
     <script src="./utils/masonry.pkgd.min.js"></script>
+    <script src="./utils/iconfont.js"></script>
 </head>
 <body>
     <div id="cjh">
@@ -31,11 +32,14 @@
                     </ul>
                 </nav>
                 <div class="main-userInfo">
-                    <ul class="action-list">
+                    <ul class="action-list" style="display: none;">
                         <li class="action-item"><div class="useraction"><button class="creatRoom">创建房间</button></div></li>
                         <li class="action-item"><a class="useraction"><img class="notify" src="./assets/notification.png" /></a></li>
                         <li class="action-item"><div class="avatar useraction"><img src="./assets/avatar.png" /></div></li>
                     </ul>
+                    <div class="signUp">
+                        <button class="signUpButton" onclick="showsignUp(event)">登录</button>
+                    </div>
                 </div>
             </div>
         </header>
@@ -47,26 +51,26 @@
                             <h1>房间</h1>
                         </div>
                         <ul class="room-list cf" id="grid">
-                            <li class="room-item">
-                                <room-card img="./assets/1.jpg" roomName="名称" />
+                            <li class="room-item" id="room1">
+                                <room-card img="./assets/1.jpg" roomName="名称"/>
                             </li>
-                            <li class="room-item">
-                                <room-card img="./assets/2.jpg" roomName="名称" />
+                            <li class="room-item" id="room2">
+                                <room-card img="./assets/2.jpg" roomName="名称"/>
                             </li>
-                            <li class="room-item">
-                                <room-card img="./assets/3.jpg" roomName="名称" />
+                            <li class="room-item" id="room3">
+                                <room-card img="./assets/3.jpg" roomName="名称"/>
                             </li>
-                            <li class="room-item">
-                                <room-card img="./assets/4.jpg" roomName="名称" />
+                            <li class="room-item" id="room4">
+                                <room-card img="./assets/4.jpg" roomName="名称"/>
                             </li>
-                            <li class="room-item">
-                                <room-card img="./assets/5.jpg" roomName="名称" />
+                            <li class="room-item" id="room5">
+                                <room-card img="./assets/5.jpg" roomName="名称"/>
                             </li>
-                            <li class="room-item">
-                                <room-card img="./assets/6.jpg" roomName="名称" />
+                            <li class="room-item" id="room6">
+                                <room-card img="./assets/6.jpg" roomName="名称"/>
                             </li>
-                            <li class="room-item">
-                                <room-card img="./assets/7.jpg" roomName="名称" />
+                            <li class="room-item" id="room7">
+                                <room-card img="./assets/7.jpg" roomName="名称"/>
                             </li>
                         </ul>
                     </div>
@@ -74,8 +78,38 @@
             </div>
         </main>
         <footer></footer>
+        <div class="popup-box">
+            <div class="signUp-model">
+                <form class="signUp-form">
+                    <svg class="icon close" aria-hidden="true">
+                        <use xlink:href="#icon-guanbi"></use>
+                    </svg>
+                    <h4>邮箱登录</h4>
+                    <div class="login-wrap">
+                        <input id="email" type="text" placeholder="请输入邮箱"/>
+                        <input id="password" type="password" placeholder="请输入密码"/>
+                        <button id="signUp">登录</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 </body>
+<script src="utils/debounce.js"></script>
+<script type="module">
+    import getUserInfo from './utils/getUserInfo.js'
+    import { getCookie } from './utils/cookie.js'
+    function VaildateIslogin() {
+        const AuthKey = getCookie('AuthKey')
+        AuthKey&&(getUserInfo().then(res => {
+            document.querySelector('.action-list').style.display="flex"
+            document.querySelector('.signUp').style.display="none"
+        }).catch((reject) => {
+            alert('无此用户！重新登录')
+        }))
+    }
+    window.addEventListener('load',debounce(VaildateIslogin,200))
+</script>
 <script>
     window.addEventListener('load',() => {
         var elem = document.querySelector('.room-list');
@@ -83,21 +117,47 @@
             itemSelector: '.room-item'
         });
     })
-</script>
-<!-- <script type="module">
-    const username = document.querySelector('#username')
-    const email = document.querySelector('#email')
-    import getUserInfo from './utils/getUserInfo.js'
-    getUserInfo().then(res => {
-        console.log(res)
-        username.innerHTML = res.username
-        email.innerHTML = res.email
-    }).catch((reject) => {
-        username.innerHTML = ''
-        email.innerHTML = ''
-        console.log(reject)
+    document.querySelector('.close').addEventListener('click',() => {
+        document.querySelector('.signUp-model').style.display = "none"
     })
-</script> -->
-<!-- <script src="fetchCard.js" defer></script>
-<script src="card.js" defer></script> -->
+    function showsignUp(event) {
+        event.preventDefault()
+        document.querySelector('.signUp-model').style.display = "flex"
+    }
+</script>
+<script type="module">
+    import request from './utils/fetch.js'
+    function signUp(event) {
+        event.preventDefault()
+        const password = document.querySelector('#password').value
+        const email = document.querySelector('#email').value
+        let form = {
+            email: email,
+            password: password
+        }
+        request('/login','POST',form).then(res=>{
+            document.cookie="AuthKey=" + res.data;
+            document.querySelector('.action-list').style.display="flex"
+            document.querySelector('.signUp').style.display="none"
+            document.querySelector('.signUp-model').style.display = "none"
+        }).catch(err => {
+            console.log(err)
+        })
+    }
+    document.querySelector('#signUp').addEventListener('click',signUp)
+</script>
+<script>
+    let grid = document.querySelector('#grid')
+    document.querySelector('#grid').addEventListener('click',(event) => {
+        let target = event.target;
+        while(target !== grid){
+            if(target.tagName.toLowerCase() == 'li'){
+                console.log(target.id);
+                break;
+            }
+            target = target.parentNode;
+        }
+        window.location.href = `http://localhost:5000/chat.html?roomid=${target.id}`
+    })
+</script>
 </html>

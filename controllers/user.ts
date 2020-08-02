@@ -26,8 +26,8 @@ const loginSchema = yup.object({
 export async function signUp(ctx: RouterContext) {
     const { request, response } = ctx
     try {
-        const body = await request.body()
-        const data: Omit<User, 'id'> = body.value
+        const body:any = await request.body()
+        const data: Omit<User, 'id'> = await body.value
         await signupSchema.validate(data);
         const userId = uuid.generate();
         // 查找邮箱是否注册过
@@ -54,10 +54,9 @@ export async function signUp(ctx: RouterContext) {
 export async function login(ctx: RouterContext) {
     const { request, response } = ctx
     try {
-        const body = await request.body()
-        const data: Omit<User, "id"|"name"> = body.value
+        const body:any = await request.body()
+        const data:Omit<User, 'id'> = await body.value
         await loginSchema.validate(data)
-
         const user = await MUser.comparePassword(data.email, data.password)
         if(!user) {
             response.status = 400

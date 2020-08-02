@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Document</title>
     <link rel="stylesheet" href="./styles/chart.css?version=3">
+    <script src="./components/roomer.js" defer></script>
 </head>
 <body>
     <div id="cjh">
@@ -28,22 +29,28 @@
                     </ul>
                 </nav>
                 <div class="main-userInfo">
-                    <ul class="action-list">
+                    <ul class="action-list" style="display: none;">
                         <li class="action-item"><div class="useraction"><button class="creatRoom">创建房间</button></div></li>
                         <li class="action-item"><a class="useraction"><img class="notify" src="./assets/notification.png" /></a></li>
                         <li class="action-item"><div class="avatar useraction"><img src="./assets/avatar.png" /></div></li>
                     </ul>
+                    <div class="signUp">
+                        <button class="signUpButton" onclick="showsignUp(event)">登录</button>
+                    </div>
                 </div>
             </div>
         </header>
         <main class="main-wrap">
             <div class="chat-wrap">
                 <div class="roomer-wrap">
-                    <header class="title"><h3>当前房间在线人数:</h3><p class="number">100</p></header>
+                    <header class="title"><h3>当前<span id="roomid"></span>在线人数:</h3><p class="number">100</p></header>
                     <section class="roomer-list-wrap">
                         <ul class="roomer-list">
                             <li class="roomer-item">
-                                <a class="userwrap"><div class="useravatar-wrap"><img class="useravatar" src="./assets/avatar.png"/></div><div class="username">cjh</div></a>
+                                <room-item img="./assets/avatar.png" username="cjh"/>
+                            </li>
+                            <!-- <li class="roomer-item">
+                                <a class="userwrap"><div class="useravatar-wrap"><img class="useravatar" src="./assets/avatar.png"/></div><p class="username">cjh</p></a>
                             </li>
                             <li class="roomer-item">
                                 <a class="userwrap"><div class="useravatar-wrap"><img class="useravatar" src="./assets/avatar.png"/></div><div class="username">cjh</div></a>
@@ -92,30 +99,24 @@
                             </li>
                             <li class="roomer-item">
                                 <a class="userwrap"><div class="useravatar-wrap"><img class="useravatar" src="./assets/avatar.png"/></div><div class="username">cjh</div></a>
-                            </li>
+                            </li> -->
                         </ul>
                     </section>
                 </div>
                 <div class="message-wrap">
                     <div class="message-widget"></div>
                     <form class="sendmessage">
-                        <div class="sendInput"><input type="text"/></div>
+                        <div class="sendInput"><input id="message" type="text"/></div>
                         <div class="sendButton">
-                            <button>发送</button>
+                            <button onclick="sendMessage(event)">发送</button>
                         </div>
                     </form>
                 </div>
             </div>
         </main>
-        <!-- <footer style="position: absolute;bottom: 0;">1111</footer> -->
     </div>
 </body>
-<script>
-    document.querySelector('.main-wrap').style.height = (window.innerHeight  - 56) + 'px'
-    document.querySelector('.main-wrap').style.maxHeight = (window.innerHeight  - 56) + 'px'
-    window.addEventListener('resize', () => {
-        document.querySelector('.main-wrap').style.height = (window.innerHeight  - 56) + 'px'
-        document.querySelector('.main-wrap').style.maxHeight = (window.innerHeight  - 56) + 'px'
-    })    
-</script>
+<script src="utils/debounce.js"></script>
+<script src="utils/getQueryString.js"></script>
+<script src="js/chat.js" type="module"></script>
 </html>

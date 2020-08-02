@@ -83,6 +83,17 @@ ul {
     height: auto;
 }
 
+.signUp {
+    line-height: 80px;
+}
+
+.signUpButton {
+    border: 1px solid #007fff;
+    background-color: #fff;
+    padding: .3rem 1.6rem;
+    color: #007fff;
+    line-height: 1.9rem;
+}
 
 
 /* userInfo */

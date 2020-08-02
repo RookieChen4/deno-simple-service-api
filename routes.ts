@@ -1,8 +1,9 @@
 import { Router } from "./deps.ts";
-const router = new Router()
 import { getProducts, getProductById, addProduct, updateProduct, deleteProduct } from './controllers/product.ts'
 import { signUp, login, me } from './controllers/user.ts'
 import { test } from './controllers/test.ts'
+
+const router = new Router()
 
 router.get('/api/getall',getProducts)
     .get('/api/getProductById/:id',getProductById)
