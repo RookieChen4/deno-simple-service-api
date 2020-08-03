@@ -55,6 +55,9 @@ function onConnectionOpen () {
     ws.send(JSON.stringify(event));
 }
 
+
+const messageWidget = document.querySelector('.message-widget')
+
 function onMessageReceived(message) {
     console.log(message)
     const event = JSON.parse(message.data)
@@ -70,19 +73,42 @@ function onMessageReceived(message) {
                 userlist.appendChild(li)
             });
           break;
-        case "closed":
-            onConnectionClosed()
+        case "message":
+            appendMessage(event.data)
+            break;
+        case "previousMessages":
+            event.data.forEach(appendMessage);
       }
 }
 function onConnectionClosed() {
     console.log('closed')
 }
 
-function sendMessage(event) {
-    event.preventDefault()
+function appendMessage(event) {
+    const messageEl = document.createElement("div");
+    messageEl.className = event.sender == 'me' ? 'messagefromme' : 'messagetome'
+    messageEl.innerHTML = `
+        <h4>${event.username}</h4>
+        <p class="message-text">${event.message}</p>
+    `;
+    messageWidget.appendChild(messageEl);
+}
+
+
+const sendButton = document.querySelector('#sendButton').addEventListener('click',sendMessage)
+function sendMessage(e) {
+    e.preventDefault()
     if(!document.querySelector('#message').value) {
         return
     }
-    ws.send(document.querySelector('#message').value)
+    const event = {
+        type: "sendMessage",
+        rommid: rommid,
+        username: username,
+        email: email,
+        userid: userid,
+        message: document.querySelector('#message').value
+    };
+    ws.send(JSON.stringify(event))
     document.querySelector('#message').value = ''
 }

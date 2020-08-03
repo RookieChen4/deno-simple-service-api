@@ -275,6 +275,30 @@ ul {
     font-size: 2rem;
 }
 
+.message-widget {
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+}
+
+.messagetome{
+    border-radius: 8px;
+    align-self: flex-start;
+    padding: 6px 10px;
+    background-color: #dedede;
+    margin-bottom: 10px;
+}
+
+.messagefromme{
+    border-radius: 8px;
+    align-self: flex-end;
+    padding: 6px 10px;
+    background-color: #3498db;
+    margin-bottom: 10px;
+    color: white;
+  }
+  
+
 
 
 
