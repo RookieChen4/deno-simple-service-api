@@ -2,22 +2,103 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Document</title>
-    <script src="fetchCard.js" defer></script>
-    <script src="card.js" defer></script>
+    <link rel="stylesheet" href="./styles/index.css">
+    <script src="./components/roomCard.js" defer></script>
+    <script src="./utils/masonry.pkgd.min.js"></script>
+    <script src="./utils/iconfont.js"></script>
 </head>
 <body>
-    <% if (name) { %>
-      <h1>hello, <%= name %>!</h1>
-    <% } %>
-    <button onclick="test()">123</button>
-    <main>
-    </main>
+    <div id="cjh">
+        <header class="main-header">
+            <div class="header-container">
+                <a class="logo">
+                    <img class="logo-PC" src="./assets/logo.png"/>
+                    <img class="menu" src="./assets/menu.png"/>
+                </a>
+                <nav class="main-nav">
+                    <ul class="nav-list">
+                        <li class="nav-item">首页</li>
+                        <li class="nav-item">话题</li>
+                        <li class="nav-item">活动</li>
+                        <li class="nav-item nav-search">
+                            <form class="search-form">
+                                <input placeholder="search"/>
+                                <img class="search-icon" src="./assets/search.png"/>
+                            </form>
+                        </li>
+                    </ul>
+                </nav>
+                <div class="main-userInfo">
+                    <ul class="action-list" style="display: none;">
+                        <li class="action-item"><div class="useraction"><button class="creatRoom">创建房间</button></div></li>
+                        <li class="action-item"><a class="useraction"><img class="notify" src="./assets/notification.png" /></a></li>
+                        <li class="action-item"><div class="avatar useraction"><img src="./assets/avatar.png" /></div></li>
+                    </ul>
+                    <div class="signUp">
+                        <button class="signUpButton">登录</button>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <main class="main-wrap">
+            <div class="home-widget">
+                <section class="room-content">
+                    <div class="content-wrap">
+                        <div class="content-title">
+                            <h1>房间</h1>
+                        </div>
+                        <ul class="room-list cf" id="grid">
+                            <% list.forEach(function(item){ %>
+                              <li class="room-item" id=<%= item.roomid %>>
+                                <room-card img=<%= item.img %> roomName=<%= item.roomName %>></room-card>
+                              </li>
+                            <% }); %>
+                            <!-- <li class="room-item" id="room1">
+                                <room-card img="./assets/1.jpg" roomName="名称"/>
+                            </li>
+                            <li class="room-item" id="room2">
+                                <room-card img="./assets/2.jpg" roomName="名称"/>
+                            </li> -->
+                            <li class="room-item" id="room3">
+                                <room-card img="./assets/3.jpg" roomName="名称"/>
+                            </li>
+                            <li class="room-item" id="room4">
+                                <room-card img="./assets/4.jpg" roomName="名称"/>
+                            </li>
+                            <li class="room-item" id="room5">
+                                <room-card img="./assets/5.jpg" roomName="名称"/>
+                            </li>
+                            <li class="room-item" id="room6">
+                                <room-card img="./assets/6.jpg" roomName="名称"/>
+                            </li>
+                            <li class="room-item" id="room7">
+                                <room-card img="./assets/7.jpg" roomName="名称"/>
+                            </li>
+                        </ul>
+                    </div>
+                </section>
+            </div>
+        </main>
+        <footer></footer>
+        <div class="popup-box">
+            <div class="signUp-model">
+                <form class="signUp-form">
+                    <svg class="icon close" aria-hidden="true">
+                        <use xlink:href="#icon-guanbi"></use>
+                    </svg>
+                    <h4>邮箱登录</h4>
+                    <div class="login-wrap">
+                        <input id="email" type="text" placeholder="请输入邮箱"/>
+                        <input id="password" type="password" placeholder="请输入密码"/>
+                        <button id="signUp">登录</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </body>
-<script>
-    function test () {
-        alert('123')
-    }
-</script>
+<script src="utils/debounce.js"></script>
+<script src="./js/index.js" type="module"></script>
 </html>

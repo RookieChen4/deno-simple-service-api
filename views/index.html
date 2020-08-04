@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Document</title>
-    <!-- <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC&display=swap" rel="stylesheet"> -->
     <link rel="stylesheet" href="./styles/index.css">
     <script src="./components/roomCard.js" defer></script>
     <script src="./utils/masonry.pkgd.min.js"></script>
@@ -38,7 +37,7 @@
                         <li class="action-item"><div class="avatar useraction"><img src="./assets/avatar.png" /></div></li>
                     </ul>
                     <div class="signUp">
-                        <button class="signUpButton" onclick="showsignUp(event)">登录</button>
+                        <button class="signUpButton">登录</button>
                     </div>
                 </div>
             </div>
@@ -96,68 +95,5 @@
     </div>
 </body>
 <script src="utils/debounce.js"></script>
-<script type="module">
-    import getUserInfo from './utils/getUserInfo.js'
-    import { getCookie } from './utils/cookie.js'
-    function VaildateIslogin() {
-        const AuthKey = getCookie('AuthKey')
-        AuthKey&&(getUserInfo().then(res => {
-            document.querySelector('.action-list').style.display="flex"
-            document.querySelector('.signUp').style.display="none"
-        }).catch((reject) => {
-            alert('无此用户！重新登录')
-        }))
-    }
-    window.addEventListener('load',debounce(VaildateIslogin,200))
-</script>
-<script>
-    window.addEventListener('load',() => {
-        var elem = document.querySelector('.room-list');
-        var msnry = new Masonry( elem, {
-            itemSelector: '.room-item'
-        });
-    })
-    document.querySelector('.close').addEventListener('click',() => {
-        document.querySelector('.signUp-model').style.display = "none"
-    })
-    function showsignUp(event) {
-        event.preventDefault()
-        document.querySelector('.signUp-model').style.display = "flex"
-    }
-</script>
-<script type="module">
-    import request from './utils/fetch.js'
-    function signUp(event) {
-        event.preventDefault()
-        const password = document.querySelector('#password').value
-        const email = document.querySelector('#email').value
-        let form = {
-            email: email,
-            password: password
-        }
-        request('/login','POST',form).then(res=>{
-            document.cookie="AuthKey=" + res.data;
-            document.querySelector('.action-list').style.display="flex"
-            document.querySelector('.signUp').style.display="none"
-            document.querySelector('.signUp-model').style.display = "none"
-        }).catch(err => {
-            console.log(err)
-        })
-    }
-    document.querySelector('#signUp').addEventListener('click',signUp)
-</script>
-<script>
-    let grid = document.querySelector('#grid')
-    document.querySelector('#grid').addEventListener('click',(event) => {
-        let target = event.target;
-        while(target !== grid){
-            if(target.tagName.toLowerCase() == 'li'){
-                console.log(target.id);
-                break;
-            }
-            target = target.parentNode;
-        }
-        window.location.href = `http://localhost:5000/chat.html?roomid=${target.id}`
-    })
-</script>
+<script src="./js/index.js" type="module"></script>
 </html>

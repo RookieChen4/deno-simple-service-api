@@ -16,18 +16,18 @@ const app = new Application<{
 // });
 
 app.use(handleWebsocket)
-// 请求页面资源
+// 请求页面和静态资源资源
 app.use(async (context,next: () => Promise<void>) => {
   if(context.request.url.pathname.includes('api')) {
     return await next()
   }
-  // if(context.request.url.pathname.includes('template')) {
-  //   const output = await renderFileToString(`${cwd()}/views/template.ejs`, {
-  //     name: 'world',
-  //   });
-  //   context.response.body = output
-  //   return
-  // }
+  if(context.request.url.pathname.includes('template')) {
+    const output = await renderFileToString(`${cwd()}/views/template.ejs`, {
+      list: [{roomid: 1 ,img:'./assets/1.jpg', roomName: '房间1'},{roomid: 2 , img:'./assets/2.jpg', roomName: '房间2'}],
+    });
+    context.response.body = output
+    return
+  }
   await send(context, context.request.url.pathname, {
     root: `${Deno.cwd()}/views`,
     index: context.request.url.pathname,
