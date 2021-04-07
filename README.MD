@@ -1,4 +1,4 @@
-**使用deno 结合postgressql 实现简单的server**
+**使用deno 结合postgressql 实现简单的chat server**
 
 ## 前序准备
 
@@ -14,3 +14,8 @@ deno install --allow-read --allow-run --allow-write --allow-net -f --unstable ht
 ```shell
 denon start
 ```
+
+![1](./1.png)
+![1](./2.png)
+![1](./3.png)
+![1](./4.png)
